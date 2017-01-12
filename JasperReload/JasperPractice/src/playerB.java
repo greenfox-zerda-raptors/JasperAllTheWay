@@ -2,7 +2,9 @@
  * Created by User on 2017.01.12..
  */
 public class playerB {
-    public int count(int age) {
-        return age;
+    int age = 5;
+    public void count(int age) {
+        this.age=age;
+        System.out.println(age);
     }
 }
