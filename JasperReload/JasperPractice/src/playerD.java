@@ -5,7 +5,6 @@ public class playerD {
     
     public void papgajfuture(int horoscope) {
         System.out.println(horoscope);
-        System.out.println("óvatosan");
+        System.out.println("szarazon");
     }
-
 }
