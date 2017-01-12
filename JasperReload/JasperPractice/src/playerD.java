@@ -3,11 +3,7 @@
  */
 public class playerD {
 
-    public void papgajfuture(long horoscope) {
+    public void papgajfuture() {
         System.out.println("kjashdkja");
-    }
-
-    public void orbitálisfaszság() {
-
     }
 }
