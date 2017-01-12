@@ -3,6 +3,7 @@
  */
 public class playerD {
 
+
     public void papgajfuture(int horoscope) {
         System.out.println(horoscope);
         System.out.println("óvatosan");

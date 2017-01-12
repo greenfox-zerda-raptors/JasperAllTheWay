@@ -3,8 +3,9 @@
  */
 public class playerB {
     int age = 5;
+
     public void count(int age) {
-        this.age=age;
+        this.age = age;
         System.out.println(age);
     }
 }
