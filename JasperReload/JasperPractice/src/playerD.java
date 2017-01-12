@@ -3,7 +3,7 @@
  */
 public class playerD {
 
-    public void future(int horoscope){
+    public void papgajfuture(long horoscope){
         System.out.println(horoscope);
     }
 }
