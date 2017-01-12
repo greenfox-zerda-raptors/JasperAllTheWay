@@ -6,6 +6,5 @@ public class playerA {
     public void greet() {
         System.out.println("Greetings");
         System.out.println("right in the pussy");
-
     }
 }
