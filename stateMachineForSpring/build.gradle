@@ -29,6 +29,9 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework:spring-jdbc')
+    runtime('mysql:mysql-connector-java')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     compile("org.springframework.statemachine:spring-statemachine-core:1.2.1.RELEASE")
     testCompile("org.springframework.statemachine:spring-statemachine-test:1.2.1.RELEASE")

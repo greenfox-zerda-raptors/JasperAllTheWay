@@ -1,5 +1,6 @@
 package com.greenfox.jasper;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.action.Action;
@@ -20,6 +21,9 @@ import java.util.EnumSet;
 @Configuration
 @EnableStateMachine
 public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States, Events> {
+
+    @Autowired
+    private BuildingServices buildingServices;
 
     @Override
     public void configure(StateMachineConfigurationConfigurer<States, Events> config)
@@ -44,7 +48,7 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
             throws Exception {
         transitions
                 .withExternal()
-                .source(States.SI).target(States.S1).event(Events.E1).action(actionFromBasicToOne())
+                .source(States.SI).target(States.S1).event(Events.E1).action(actionFromBasicToOne(buildingServices))
                 .and()
                 .withExternal()
                 .source(States.S1).target(States.S2).event(Events.E2).action(actionFromOneToTwo());
@@ -61,8 +65,15 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
     }
 
     @Bean
-    public Action<States, Events> actionFromBasicToOne() {
-        return context -> System.out.println("action has been performed");
+    public Action<States, Events> actionFromBasicToOne(BuildingServices buildingServices) {
+        return context -> {
+            this.buildingServices = buildingServices;
+            buildingServices.saveBuilding(new Building());
+            Building tempBuilding = buildingServices.findBuilding(1L);
+            tempBuilding.setBuildingLevel(3);
+            System.out.println(tempBuilding.buildingTosTring());
+            buildingServices.saveBuilding(tempBuilding);
+        };
     }
 
     @Bean
