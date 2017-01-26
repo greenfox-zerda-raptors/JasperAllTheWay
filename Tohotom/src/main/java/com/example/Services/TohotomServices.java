@@ -21,14 +21,20 @@ public class TohotomServices{
     public void answerToLastMessage(){
         int i = getChatRepoSize();
         if(i > 0) {
-//            TODO: This will do the Tohotom stuff
-            String tohotomMessage = brains(getLastMessage());
+            String tohotomMessage = tohotomBrain(getLastMessage());
             chatMemoryRepo.addDiscreteMessage(new ChatMessage("Tohotom", tohotomMessage));
         }
     }
 
 
-    private String brains(String message) {
+    private String tohotomBrain(String message) {
+
+//            TODO: This will do the Tohotom stuff
+
+
+
+
+
         return "ok";
     }
 
