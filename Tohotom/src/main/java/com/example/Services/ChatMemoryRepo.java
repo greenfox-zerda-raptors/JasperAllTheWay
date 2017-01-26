@@ -1,5 +1,6 @@
-package com.example;
+package com.example.Services;
 
+import com.example.Domains.ChatMessage;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -21,7 +22,6 @@ public class ChatMemoryRepo implements ChatRepo {
     @Override
     public void addMessage(ChatMessage message) {
         chatMessages.add(message);
-
     }
 
     public void addDiscreteMessage(ChatMessage chatMessage) {

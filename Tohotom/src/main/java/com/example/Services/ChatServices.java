@@ -1,5 +1,6 @@
-package com.example;
+package com.example.Services;
 
+import com.example.Domains.ChatMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ public class ChatServices {
     }
 
 
+
     public void addMessage(Model model) {
         model.addAttribute("chatMessage", new ChatMessage());
     }
@@ -38,4 +40,9 @@ public class ChatServices {
             chatMemoryRepo.addMessage(chatMessage);
         }
     }
+
+
+
+
+
 }

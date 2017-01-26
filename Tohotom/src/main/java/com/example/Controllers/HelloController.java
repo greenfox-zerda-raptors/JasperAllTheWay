@@ -1,5 +1,9 @@
-package com.example;
+package com.example.Controllers;
 
+import com.example.Services.ChatServices;
+import com.example.Domains.ChatMessage;
+import com.example.Domains.User;
+import com.example.Services.TohotomServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,43 +19,55 @@ import javax.validation.Valid;
  */
 @Controller
 public class HelloController {
-
-    private final String name = "Zoltan";
-
     @Autowired
     ChatServices chatServices;
 
     @Autowired
     TohotomServices tohotomServices;
 
+    User user;
+
     @GetMapping("/main")
     private String addName(Model model){
-
-        return "greetings";
+        addUser(model);
+        return "main";
     }
     @PostMapping("/main")
-    private String submitName(@ModelAttribute @Valid String name, BindingResult bindingResult){
-        
-        return "redirect:/hello";
+    private String submitName(@ModelAttribute @Valid User username, BindingResult bindingResult){
+        submitUser(username, bindingResult);
+        return "redirect:/tohotom";
     }
 
-    @GetMapping("/hello")
+    @GetMapping("/tohotom")
     private String addNewMessage(Model model){
         model.addAttribute("messagesList", chatServices.getMessages());
-        model.addAttribute("username", name);
+        model.addAttribute("user", user);
         chatServices.addMessage(model);
-        return "hello";
+        return "chatbot";
     }
-    @PostMapping("/hello")
+    @PostMapping("/tohotom")
     private String sumbitMessage(@ModelAttribute @Valid ChatMessage chatMessage, BindingResult bindingResult){
         chatServices.submitMessage(chatMessage, bindingResult);
         tohotomServices.answerToLastMessage();
-        return "redirect:/hello";
+        return "redirect:/tohotom";
     }
 
 
 
 
+    
+
+    private void addUser(Model model) {
+        model.addAttribute("username", new User());
+    }
+
+    private void submitUser(User user, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            System.out.println("error");
+        }else{
+            this.user = user;
+        }
+    }
 
 
 }
