@@ -55,7 +55,7 @@ public class HelloController {
 
 
 
-    
+
 
     private void addUser(Model model) {
         model.addAttribute("username", new User());
