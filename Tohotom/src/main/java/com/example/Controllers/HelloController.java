@@ -1,5 +1,9 @@
-package com.example;
+package com.example.Controllers;
 
+import com.example.Services.ChatServices;
+import com.example.Domains.ChatMessage;
+import com.example.Domains.User;
+import com.example.Services.TohotomServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,11 +54,14 @@ public class HelloController {
 
 
 
-    public void addUser(Model model) {
+
+    
+
+    private void addUser(Model model) {
         model.addAttribute("username", new User());
     }
 
-    public void submitUser(User user, BindingResult bindingResult) {
+    private void submitUser(User user, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             System.out.println("error");
         }else{

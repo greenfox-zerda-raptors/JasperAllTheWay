@@ -1,4 +1,6 @@
-package com.example;
+package com.example.Services;
+
+import com.example.Domains.ChatMessage;
 
 import java.util.List;
 

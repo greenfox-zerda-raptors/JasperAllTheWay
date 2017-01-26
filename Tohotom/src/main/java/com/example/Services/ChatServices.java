@@ -1,5 +1,6 @@
-package com.example;
+package com.example.Services;
 
+import com.example.Domains.ChatMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
@@ -15,8 +16,6 @@ import java.util.List;
 public class ChatServices {
 
     ChatMemoryRepo chatMemoryRepo;
-
-    User user;
 
     @Autowired
     public ChatServices(ChatMemoryRepo chatMemoryRepo){

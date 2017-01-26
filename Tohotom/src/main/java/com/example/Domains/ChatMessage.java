@@ -1,4 +1,4 @@
-package com.example;
+package com.example.Domains;
 
 /**
  * Created by Zoltán on 2017.01.26..
@@ -9,6 +9,7 @@ public class ChatMessage {
     private String sender = "You";
     private String message;
     private long time = 1;
+
 
     public ChatMessage() {
     }

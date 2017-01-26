@@ -1,5 +1,6 @@
-package com.example;
+package com.example.Services;
 
+import com.example.Domains.ChatMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,8 +25,8 @@ public class TohotomServices{
             String tohotomMessage = brains(getLastMessage());
             chatMemoryRepo.addDiscreteMessage(new ChatMessage("Tohotom", tohotomMessage));
         }
-
     }
+
 
     private String brains(String message) {
         return "ok";
