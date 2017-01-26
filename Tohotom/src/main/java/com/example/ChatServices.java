@@ -16,6 +16,8 @@ public class ChatServices {
 
     ChatMemoryRepo chatMemoryRepo;
 
+    User user;
+
     @Autowired
     public ChatServices(ChatMemoryRepo chatMemoryRepo){
         this.chatMemoryRepo = chatMemoryRepo;
@@ -25,6 +27,7 @@ public class ChatServices {
     public List<ChatMessage> getMessages() {
         return chatMemoryRepo.getMessages();
     }
+
 
 
     public void addMessage(Model model) {
@@ -38,4 +41,9 @@ public class ChatServices {
             chatMemoryRepo.addMessage(chatMessage);
         }
     }
+
+
+
+
+
 }
