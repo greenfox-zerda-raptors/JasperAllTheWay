@@ -29,6 +29,7 @@ public class HelloController {
 
     @GetMapping("/main")
     private String addName(Model model){
+        chatServices.flushMessages();
         addUser(model);
         return "main";
     }

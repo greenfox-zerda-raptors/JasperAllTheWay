@@ -2,6 +2,7 @@ package com.example.Services;
 
 import com.example.Domains.ChatMessage;
 import com.example.Domains.Conversation;
+import com.example.Domains.RandomAnswer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +15,10 @@ public class TohotomServices{
 
     ChatMemoryRepo chatMemoryRepo;
 
+    private String topic;
+
     private String[] locations = new String[]{
-      "budapest", "paris", "london", "tokyo", "new york"
+            "budapest", "paris", "london", "tokyo", "new york"
     };
     private String[] punctuation = new String[]{
             "!", "?", "."
@@ -27,8 +30,9 @@ public class TohotomServices{
             "weather"
     };
     private String[] swearWord = new String[]{
-      "fuck"
+            "fuck"
     };
+    private RandomAnswer randomAnswers = new RandomAnswer();
 
     @Autowired
     public TohotomServices(ChatMemoryRepo chatMemoryRepo){
@@ -62,30 +66,44 @@ public class TohotomServices{
 
 
 
-            return calculateValidAnswerType(conversation);
+        return calculateValidAnswerType(conversation);
     }
-
-
 
 
     private String calculateValidAnswerType(Conversation conversation) {
         String result = "";
 
-        if(conversation.everythingIsNull()){
-            return "not known type";
-        }else if(conversation.getKeyWord() != null && conversation.getQuestionWord() != null){
-            return "question about " + conversation.getKeyWord();
-        } else if(conversation.getSwearWord() != null) {
-            return "angy";
-        }else {
-            result += "Something about ";
-            if (conversation.getLocation() != null) {
-                result += "Location:" + conversation.getLocation();
-            }
-        }
+        if(conversation.everythingIsNull()) {
+            return "I could not get that!";
+        } else if(conversation.oneThingIsNotNull() && topic != null) {
+            return createAnswerWithKeyWord(conversation, topic);
 
+        }else if(conversation.getKeyWord() != null && conversation.getQuestionWord() != null){
+            return createAnswerWithKeyWord(conversation, conversation.getKeyWord());
+        } else if(conversation.getSwearWord() != null) {
+            // TODO get angrier
+            return "angry";
+        }
         return result;
     }
+
+    private String createAnswerWithKeyWord(Conversation conversation, String keyWord) {
+        if(keyWord.contains("weather")){
+            this.topic = "weather";
+            if(conversation.getLocation() != null){
+                this.topic = null;
+                return "The weather in " + conversation.getLocation() +  " is " + randomAnswers.getRandomWeather();
+            }else if (conversation.getLocation() == null){
+                return "Where?";
+            }else{
+                return "ok";
+            }
+        }else{
+            return "OK";
+        }
+    }
+
+
     private boolean hasKeyWord(String message) {
         int h = 0;
         for(int i = 0; i < keyWord.length; i++){
@@ -127,19 +145,19 @@ public class TohotomServices{
     }
 
     private String obtainLocation(String message) {
-       String result = null;
+        String result = null;
         for(int i = 0; i<locations.length; i++){
-            if(message.contains(locations[i])){
+            if(message.toLowerCase().contains(locations[i])){
                 result =  locations[i];
             }
-            }
+        }
         return result;
     }
 
     private boolean startsWithQuestionWord(String message) {
         int h =0;
         for(int i = 0; i< questionWord.length; i++) {
-            if (message.startsWith(questionWord[i])) {
+            if (message.contains(questionWord[i])) {
                 h++;
             }
         }

@@ -85,4 +85,30 @@ public class Conversation {
                 swearWord == null
         );
     }
+
+    public boolean oneThingIsNotNull() {
+        int k = 0;
+                if(topic == null){
+                    k++;
+                }
+                if(location == null){
+                    k++;
+                }
+                if(conversationState == null){
+                    k++;
+                }
+                if(sentenceType == null){
+                    k++;
+                }
+                if(questionWord == null){
+                    k++;
+                }
+                if(keyWord == null){
+                    k++;
+                }
+                if(swearWord == null){
+                    k++;
+                }
+        return k == 6;
+    }
 }
