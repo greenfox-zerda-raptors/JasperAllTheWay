@@ -23,8 +23,8 @@ public class RandomAnswer {
                     "Sometimes I just talk and talk and talk and can’t stop, but it makes me really happy when someone listens to me",
                     "Every conflict can be solved with a nice loong conversation, don’t you think?",
                     "It is amazing to have someone you can freely talk to!"
-            )
-    );
+            ));
+
     private List<String> agreeableness = new ArrayList<>(
             Arrays.asList(
                     "You musn’t be ashamed of your feelings.",
@@ -33,8 +33,8 @@ public class RandomAnswer {
                     "I agree with you",
                     "Everyone has their right to have an opinion",
                     "I'm sure you have your reasons to think like this.",
-                    "And why do you believe it?")
-    );
+                    "And why do you believe it?"
+            ));
 
     private List<String> conscientiousness = new ArrayList<>(
             Arrays.asList(
@@ -72,10 +72,7 @@ public class RandomAnswer {
                     "Life is boring without new things...",
                     "Why do you even live if you don’t do exciting things?",
                     "Yes, go on an adventure! It helps develop your personality."
-
             ));
-
-
 
 
     public RandomAnswer() {
