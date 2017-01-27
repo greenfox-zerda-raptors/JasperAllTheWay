@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public class ChatMemoryRepo implements ChatRepo {
 
-    private final List<ChatMessage> chatMessages = new ArrayList<>();
+    private  List<ChatMessage> chatMessages = new ArrayList<>();
 
     @Override
     public List<ChatMessage> getMessages() {
@@ -26,5 +26,9 @@ public class ChatMemoryRepo implements ChatRepo {
 
     public void addDiscreteMessage(ChatMessage chatMessage) {
         chatMessages.add(chatMessage);
+    }
+
+    public void deleteAll() {
+        this.chatMessages = new ArrayList<>();
     }
 }

@@ -27,8 +27,6 @@ public class ChatServices {
         return chatMemoryRepo.getMessages();
     }
 
-
-
     public void addMessage(Model model) {
         model.addAttribute("chatMessage", new ChatMessage());
     }
@@ -42,7 +40,7 @@ public class ChatServices {
     }
 
 
-
-
-
+    public void flushMessages() {
+        chatMemoryRepo.deleteAll();
+    }
 }
