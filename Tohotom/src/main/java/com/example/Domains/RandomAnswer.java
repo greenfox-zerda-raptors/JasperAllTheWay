@@ -78,8 +78,8 @@ public class RandomAnswer {
     public RandomAnswer() {
     }
 
-    public String getRandomAnswer(Personality personality){
-       List<String > resultList = new ArrayList<>();
+    public String personalityAnswer(Personality personality){
+       List<String > resultList;
         switch (personality){
             case EXTRAVERSION:
                 resultList = extraversion;

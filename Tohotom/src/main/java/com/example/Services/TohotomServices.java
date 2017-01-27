@@ -33,14 +33,13 @@ public class TohotomServices{
             "fuck"
     };
 
-    private TriggerWords triggerWords;
+    private TriggerWords triggerWords = new TriggerWords();
 
     private RandomAnswer randomAnswers = new RandomAnswer();
 
     @Autowired
-    public TohotomServices(ChatMemoryRepo chatMemoryRepo, TriggerWords triggerWords){
+    public TohotomServices(ChatMemoryRepo chatMemoryRepo){
         this.chatMemoryRepo = chatMemoryRepo;
-        this.triggerWords = triggerWords
     }
 
     public void answerToLastMessage(){
@@ -55,25 +54,24 @@ public class TohotomServices{
     private String tohotomBrain(String message) {
         Conversation conversation = new Conversation();
 
+        // it hurts to see this.... sorry... RIP cleanCode....
         if(hasTriggerWords(message.toLowerCase())){
-
+                return randomAnswers.personalityAnswer(personality);
+        }else {
+            if (hasLocation(message.toLowerCase())) {
+                conversation.setLocation(obtainLocation(message));
+            }
+            if (hasPunctuation(message)) {
+                conversation.setSentenceType(obtainPunctuatuion(message));
+            }
+            if (startsWithQuestionWord(message.toLowerCase())) {
+                conversation.setQuestionWord(obtainQuestionWord(message));
+            }
+            if (hasKeyWord(message.toLowerCase())) {
+                conversation.setKeyWord(obtainKeyWord(message));
+            }
+            return calculateValidAnswerType(conversation);
         }
-        if(hasLocation(message.toLowerCase())){
-            conversation.setLocation(obtainLocation(message));
-        }
-        if(hasPunctuation(message)){
-            conversation.setSentenceType(obtainPunctuatuion(message));
-        }
-        if(startsWithQuestionWord(message.toLowerCase())){
-            conversation.setQuestionWord(obtainQuestionWord(message));
-        }
-        if(hasKeyWord(message.toLowerCase())){
-            conversation.setKeyWord(obtainKeyWord(message));
-        }
-
-
-
-        return calculateValidAnswerType(conversation);
     }
 
     private boolean hasTriggerWords(String message) {
@@ -121,7 +119,7 @@ public class TohotomServices{
     private String calculateValidAnswerType(Conversation conversation) {
         String result = "";
 
-        if(conversation.everythingIsNull()) {
+         if(conversation.everythingIsNull()) {
             return "I could not get that!";
         } else if(conversation.oneThingIsNotNull() && topic != null) {
             return createAnswerWithKeyWord(conversation, topic);
